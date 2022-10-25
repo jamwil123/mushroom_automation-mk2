@@ -5,7 +5,7 @@ import schedule
 # GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
 
 
-startTime = time.time()
+startTime = devicesStatus[lights][time_schedule][startTime]
 endTime = time.time() + 10
 ST_ET_GAP = 10
 interval = 10
@@ -13,13 +13,15 @@ repeat = True
 GPIOVal = 1
 isOn = False
 
+print(startTime)
+
 
 def lights():
     global endTime
-    global isOn 
+    global isOn
     global startTime
     global repeat
-    global interval 
+    global interval
     global repeat
     global ST_ET_GAP
     
