@@ -24,11 +24,15 @@ devicesStatus = {
     PrevStatus: False,
     statusChange: True,
     time_function: lights,
+    GPIO_Pin: 1,
     time_schedule: {
+        schedule: True,
         start_date:time.time(),
         start_time: time.time(),
         end_date: time.time(),
-        end_time: time.time() + ST_ET_GAP 
+        end_time: time.time() + 10,
+        interval: 10,
+        repeat_timer: True
 
     }
     }, "humidifier": {

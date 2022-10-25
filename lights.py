@@ -6,14 +6,12 @@ import schedule
 
 
 startTime = devicesStatus[lights][time_schedule][startTime]
-endTime = time.time() + 10
+endTime = time.time() + ST_ET_GAP
 ST_ET_GAP = 10
 interval = 10
-repeat = True 
-GPIOVal = 1
-isOn = False
-
-print(startTime)
+repeat = devicesStatus[lights][time_schedule][repeat_timer]
+GPIO_Pin = devicesStatus[lights][GPIO_Pin]
+isOn = devicesStatus[lights][CurrentStatus]
 
 
 def lights():
