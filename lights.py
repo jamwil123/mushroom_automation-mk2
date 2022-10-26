@@ -7,11 +7,13 @@ import schedule
 
 startTime = time.time()
 endTime = time.time() + 10
-ST_ET_GAP = 10
+ST_ET_GAP = endTime - startTime
 interval = 10
 repeat = True 
 GPIOVal = 1
 isOn = False
+turnOnNow = True
+turnOffNow = False
 
 
 def lights():
@@ -22,6 +24,16 @@ def lights():
     global interval 
     global repeat
     global ST_ET_GAP
+    global turnOnNow
+    global turnOffNow
+
+    if turnOnNow: 
+       lightsOn()
+       turnOnNow = False 
+
+    if turnOffNow: 
+       lightsOff()
+       turnOffNow = False 
     
     if time.time() < endTime and isOn == False: 
         lightsOn()
