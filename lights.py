@@ -1,5 +1,6 @@
 import time
 import schedule
+from main import devicesStatus
 # import RPi.GPIO as GPIO
 
 # GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
@@ -7,7 +8,7 @@ import schedule
 
 startTime = time.time()
 endTime = time.time() + 10
-ST_ET_GAP = endTime - startTime
+ST_ET_GAP = 10
 interval = 10
 repeat = True 
 GPIOVal = 1
@@ -16,12 +17,12 @@ turnOnNow = True
 turnOffNow = False
 
 
-def lights():
+def lightsController():
     global endTime
-    global isOn 
+    global isOn
     global startTime
     global repeat
-    global interval 
+    global interval
     global repeat
     global ST_ET_GAP
     global turnOnNow
