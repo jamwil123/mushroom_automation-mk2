@@ -2,9 +2,13 @@ const {addNewDevice, fetchAllDevices} = require("../models/deviceList")
 
 const postNewDevice = (req, res, next) =>{
     let deviceName = req.params.deviceName
-    console.log(deviceName)
-    addNewDevice(deviceName).then((res)=>{
+    let deviceData = req.body
+    console.log(deviceName, deviceData)
+
+    addNewDevice(deviceName, deviceData[0]).then((res)=>{
         console.log(res)
+    }).catch(({msg, status})=>{
+        console.log(msg)
     })
 
 }

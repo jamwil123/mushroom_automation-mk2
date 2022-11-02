@@ -1,16 +1,13 @@
 const db = require('../db/db')
 
-const checkIfDeviceAlreadyExists = (deviceName) => { 
-    console.log("in uti func")
-    return db
-    .collection('main')
-    .doc(deviceName)
-    .get()
-    .then((res)=>{
-        console.log(res.docs(), "<<<<<")
-
-   
-    })
+const checkIfDeviceAlreadyExists = async (deviceName) => { 
+    const cityRef = db.collection('main').doc(deviceName);
+const doc = await cityRef.get();
+if (!doc.exists) {
+  return false
+} else {
+  return true
+}
 }
 
 module.exports = { checkIfDeviceAlreadyExists }

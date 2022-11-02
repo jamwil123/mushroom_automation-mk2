@@ -2,32 +2,39 @@ const db = require('../db/db')
 const { checkIfDeviceAlreadyExists } = require("../utils/utils_functions")
 
 
-const addNewDevice = (deviceName) => {
-    console.log('in model')
-    console.log("func check " +  checkIfDeviceAlreadyExists(deviceName))
-// if(checkIfDeviceAlreadyExists()) {//Checks DB to see if the device name already exists 
-// throw 'Device name already exists' } //If the device exists, throw error
+const addNewDevice = async (deviceName, deviceData) => {
 const data = {
-    "CurrentStatus": false,
-    "PrevStatus": false,
-    "statusChange": false,
-    "time_function": "",
-    "GPIO_Pin": NaN,
+    "CurrentStatus": deviceData["CurrentStatus"],
+    "PrevStatus": deviceData["PrevStatus"],
+    "statusChange": deviceData["statusChange"],
+    "time_function": deviceData["time_function"],
+    "GPIO_Pin": deviceData["GPIO_Pin"],
     "time_schedule": {
-        "schedule": true,
-        "start_date" : NaN,
-        "start_time" : NaN,
-        "end_date" : NaN,
-        "end_time" : NaN,
-        "interval" : NaN,
-        "repeat_timer" : true
+        "schedule": deviceData["time_schedule"]["schedule"],
+        "start_date" : deviceData["time_schedule"]["start_date"],
+        "start_time" : deviceData["time_schedule"]["start_time"],
+        "end_date" : deviceData["time_schedule"]["end_date"],
+        "end_time" : deviceData["time_schedule"]["end_time"],
+        "interval" : deviceData["time_schedule"]["interval"],
+        "repeat_timer" : deviceData["time_schedule"]["repeat_timer"]
     }
 }
-return db
-.collection('main')
-.doc(deviceName)
-.set(data)
-.then(()=>{
+console.log('In model')
+let check = await checkIfDeviceAlreadyExists(deviceName)
+    if(check){
+    console.log('inside If res == false')
+      return Promise.reject({status: 400, msg: 'This Device Name Already Exists!'})
+    }
+
+//  .catch(({status, msg})=>{
+//     return {status: status, msg: msg}
+//  })
+
+    return db
+    .collection('main')
+    .doc(deviceName)
+    .set(data)
+    .then(()=>{
     return db
     .collection('main')
     .doc(deviceName)
@@ -35,6 +42,7 @@ return db
         return res.data()
     })
 })
+
 }
 
 
