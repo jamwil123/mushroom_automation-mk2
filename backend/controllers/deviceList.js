@@ -1,10 +1,21 @@
-const {addNewDevice} = require("../models/dictionary")
+const {addNewDevice, fetchAllDevices} = require("../models/deviceList")
 
 const postNewDevice = (req, res, next) =>{
     let deviceName = req.params.deviceName
-    addNewDevice(deviceName).then(()=>{
+    console.log(deviceName)
+    addNewDevice(deviceName).then((res)=>{
+        console.log(res)
     })
 
 }
 
-module.exports = { postNewDevice }
+const getAllDeviceList = (req, res, next) => {
+    console.log('hello')
+    fetchAllDevices().then((devices)=>{
+        console.log(devices)
+        res.status(200).send(devices)
+    })
+
+}
+
+module.exports = { postNewDevice, getAllDeviceList }

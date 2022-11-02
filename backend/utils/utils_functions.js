@@ -1,12 +1,16 @@
+const db = require('../db/db')
+
 const checkIfDeviceAlreadyExists = (deviceName) => { 
-    db
+    console.log("in uti func")
+    return db
     .collection('main')
-    .doc()
+    .doc(deviceName)
     .get()
     .then((res)=>{
-        const data = res.filter((item)=>{
-            deviceName == item 
-        })
-        return data.length == 0 ? true : false 
+        console.log(res.docs(), "<<<<<")
+
+   
     })
 }
+
+module.exports = { checkIfDeviceAlreadyExists }

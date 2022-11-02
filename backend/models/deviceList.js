@@ -1,7 +1,12 @@
 const db = require('../db/db')
 const { checkIfDeviceAlreadyExists } = require("../utils/utils_functions")
-const postNewDevice = (deviceName) => {
 
+
+const addNewDevice = (deviceName) => {
+    console.log('in model')
+    console.log("func check " +  checkIfDeviceAlreadyExists(deviceName))
+// if(checkIfDeviceAlreadyExists()) {//Checks DB to see if the device name already exists 
+// throw 'Device name already exists' } //If the device exists, throw error
 const data = {
     "CurrentStatus": false,
     "PrevStatus": false,
@@ -33,4 +38,20 @@ return db
 }
 
 
-module.exports = {postNewDevice}
+const fetchAllDevices = () =>{
+    return db
+    .collection('main')
+    .get()
+    .then((res)=>{
+       
+        return res.docs.map((devices)=>{
+            console.log(devices.data())
+            return devices.data()
+        })
+        
+    })
+    
+}
+
+
+module.exports = {addNewDevice, fetchAllDevices}

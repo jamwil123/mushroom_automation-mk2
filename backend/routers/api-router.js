@@ -5,6 +5,6 @@ const { deviceListRouter } = require("./deviceList-router")
 
 
 apiRouter.route("/").get(getAPI);
-apiRouter.use("/dictionary", deviceListRouter )
+apiRouter.use("/device-list", deviceListRouter )
 
 module.exports = { apiRouter };
