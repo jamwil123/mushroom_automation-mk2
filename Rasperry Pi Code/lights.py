@@ -1,6 +1,5 @@
 import time
 import schedule
-from main import devicesStatus
 # import RPi.GPIO as GPIO
 
 # GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers

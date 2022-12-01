@@ -3,7 +3,7 @@ import time
 import json
 import schedule 
 from datetime import datetime, date 
-from lights import *
+from lights import lightsController
 from humidifier import humidifier
 
 
@@ -19,20 +19,20 @@ def connected_to_internet(url='http://www.google.com/', timeout=5):
 
 
 devicesStatus = {
-    lights: {
-    CurrentStatus: False,
-    PrevStatus: False,
-    statusChange: True,
-    time_function: lights,
-    GPIO_Pin: 1,
-    time_schedule: {
-        schedule: True,
-        start_date:time.time(),
-        start_time: time.time(),
-        end_date: time.time(),
-        end_time: time.time() + 10,
-        interval: 10,
-        repeat_timer: True
+    "lights": {
+    "CurrentStatus": False,
+    "PrevStatus": False,
+    "statusChange": True,
+    "time_function": lightsController,
+    "GPIO_Pin": 1,
+    "time_schedule": {
+        "schedule": True,
+        "start_date" : time.time(),
+        "start_time" : time.time(),
+        "end_date" : time.time(),
+        "end_time" : time.time() + 10,
+        "interval" : 10,
+        "repeat_timer" : True
 
     }
     }, "humidifier": {
@@ -51,6 +51,7 @@ devicesStatus = {
 
 
 }
+print(devicesStatus["lights"]["time_schedule"]["start_date"])
 
 
 data = None 
